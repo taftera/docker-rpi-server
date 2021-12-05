@@ -1,0 +1,23 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    depends_on:
+      - php
+    volumes:
+      - ./www:/usr/share/nginx/html
+      #- ./www:/var/www/html
+    ports:
+      - "8080:80"
+      - "443:443"
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./www:/usr/share/nginx/html
+      #- ./www:/var/www/html
